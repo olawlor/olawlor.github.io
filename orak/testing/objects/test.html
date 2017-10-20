@@ -1,5 +1,7 @@
+<!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8"/>
 <script type="text/javascript" src="../../js/orakEngine.js" ></script>
 
 </head>
@@ -9,15 +11,15 @@ Loading...
 </p>
 
 <script>
-var out=document.getElementById("out");
-out.innerHTML="Loaded.";
+orakEngine.printDiv=document.getElementById("out");
+orakEngine.print("Loaded.");
 
 orakEngine.debugPrint=3;
 
 for (var i=0;i<3;i++) {
 	orakEngine.createObject("testMonster.js?sq'Urel",{},
 		function(object) {
-			console.log("Made squirrel: "+object);
+			orakEngine.print("Created squirrel.");
 		}
 	);
 }

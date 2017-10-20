@@ -4,20 +4,29 @@
 */
 "use strict";
 
+/**
+ This is the class used for the orakEngine singleton.
+*/
 var orakEngineClass=function() {
-	this.version="2017-10-18 Pre-alpha";
+	this.version="2017-10-18 Pre-alpha"; ///< Version of game engine.
 	this.allTypesUsed={};  ///< Every known type
 	this.factories={}; ///< Registered factory functions, indexed by URL and family name.
 	this.factoriesLoading={}; ///< factory URLs currently being loaded
 	this.postponedCreates={}; ///< Arrays of types waiting to be created
 	this.debugPrint=10; ///< Debug messages at or above this level will be printed
+	this.printDiv=null;
 };
 
-/** Debug tracing function:
-*/
+/** Debug tracing function: */
 orakEngineClass.prototype.debug=function(debugLevel,string) {
 	if (debugLevel>=this.debugPrint)
 		console.log("debug> "+string);
+}
+
+/** Print function: */
+orakEngineClass.prototype.print=function(string) {
+	console.log("print> "+string);
+	if (this.printDiv) this.printDiv.innerHTML+=string+"<br>";
 }
 
 /**
@@ -78,7 +87,6 @@ orakEngineClass.prototype.createObject=function(orakType,options,next)
 	}
 	
 	orakEngine.debug(3,"createObject "+orakType);
-	this.allTypesUsed[orakType]=options;
 	this.createObjectAtFactory(options,next);
 }
 
@@ -98,6 +106,7 @@ orakEngineClass.prototype.createObjectAtFactory=function(options,next)
 	{ 
 		throw("orakEngine.createObjectAtFactory passed invalid URL?name "+url+"?"+name);
 	}
+	this.allTypesUsed[options.orakType]=options;
 	
 	this.factories[url][name](name,options,next);
 }
