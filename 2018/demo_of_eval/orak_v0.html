@@ -50,12 +50,30 @@ var draw_ctx=draw_canvas.getContext("2d");
 
 var draw_background=function() {
 	draw_ctx.fillStyle = "#30C020";
-	draw_ctx.shadowColor="black";
-	draw_ctx.fillRect(20,20,980,980);
+	draw_ctx.fillRect(0,0,1000,1000);
 	draw_ctx.fillStyle = "#000000";
 }
 
+var img_cache={};
+
 var draw_char=function(char) {
+	if (char.img) { // has an image URL (hotlinked!)
+		var img=img_cache[char.img];
+		var sz=64;
+		if (img) { // already loading
+			if (img.complete) { // now drawable
+				draw_ctx.shadowBlur=0;
+				draw_ctx.drawImage(img,char.location.x,char.location.y,
+					sz,sz);
+			}
+		}
+		else { // need to load image
+			img=new Image(sz,sz);
+			img.src=char.img;
+			img_cache[char.img]=img;
+		}
+	}
+
 	draw_ctx.font="20px Arial";
 	draw_ctx.shadowBlur=10;
 	draw_ctx.shadowColor=char.appearance || "black";
