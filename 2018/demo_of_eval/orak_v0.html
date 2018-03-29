@@ -1,7 +1,7 @@
 <html><head><title>Web Programming Demo</title></head>
 <body>
 <h1>Character Interaction Demo</h1>
-<canvas id="draw_canvas" style="width:400px;height:400px" width="400" height="400">
+<canvas id="draw_canvas" style="width:400px;height:400px" width="1000" height="1000">
 <script>
 // Basic comm utilities:
 var superstar={};
@@ -55,10 +55,11 @@ var draw_background=function() {
 }
 
 var draw_char=function(char) {
-	draw_ctx.font="12px Arial";
+	draw_ctx.font="20px Arial";
 	draw_ctx.shadowBlur=10;
 	draw_ctx.shadowColor=char.appearance || "black";
-	draw_ctx.fillText(char.name || "NULLMAN",char.location.x,char.location.y);
+	if (!char.location) char.location={x:200,y:200};
+	draw_ctx.fillText(char.name || "BROKEMAN",char.location.x,char.location.y);
 }
 
 
