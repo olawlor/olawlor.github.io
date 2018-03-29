@@ -26,7 +26,9 @@ var load_all=function(handle_all_chars) {
 				try {
 					all_chars[name]=JSON.parse(all_strings[name]);
 				} 
-				catch(e) { /* ignore chars with bad JSON */ }
+				catch(e) { 
+					console.log("Parse error "+e+" on "+name+" (ignoring)");
+				}
 			}
 			handle_all_chars(all_chars);
 		}
@@ -49,7 +51,7 @@ var draw_char=function(char) {
 	draw_ctx.font="12px Arial";
 	draw_ctx.shadowBlur=10;
 	draw_ctx.shadowColor=char.appearance || "black";
-	draw_ctx.fillText(char.name || "NULLMAN",char.x,char.y);
+	draw_ctx.fillText(char.name || "NULLMAN",char.location.x,char.location.y);
 }
 
 
