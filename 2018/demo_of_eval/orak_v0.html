@@ -24,7 +24,7 @@ var load_all=function(handle_all_chars) {
 			var all_chars={};
 			for (var name in all_strings) {
 				try {
-					all[name]=JSON.parse(all_strings[name]);
+					all_chars[name]=JSON.parse(all_strings[name]);
 				} 
 				catch(e) { /* ignore chars with bad JSON */ }
 			}
