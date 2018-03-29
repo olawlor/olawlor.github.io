@@ -50,7 +50,8 @@ var draw_ctx=draw_canvas.getContext("2d");
 
 var draw_background=function() {
 	draw_ctx.fillStyle = "#30C020";
-	draw_ctx.fillRect(0,0,400,400);
+	draw_ctx.shadowColor="black";
+	draw_ctx.fillRect(20,20,980,980);
 	draw_ctx.fillStyle = "#000000";
 }
 
