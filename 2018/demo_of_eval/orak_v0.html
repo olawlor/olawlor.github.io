@@ -34,7 +34,7 @@ var load_all=function(handle_all_chars) {
 };
 
 // Save a character under this name
-void save_char=function(name,char) {
+var save_char=function(name,char) {
 	var req="2018/orak/v0/chars/"+name+"?set=";
 	req+=encodeURIComponent(JSON.stringify(char));
 	superstar.network(req,
