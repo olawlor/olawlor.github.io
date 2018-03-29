@@ -2,27 +2,46 @@
 <body>
 <h1>Web Programming Demo</h1>
 <script>
+// Basic comm utilities:
 var superstar={};
-superstar.server="https://superstar.lawlorcode.com/superstar/"
-superstar.error=function(why) {
-    console.log("SUPERSTAR ERROR: "+why);
-};
+superstar.server="https://superstar.lawlorcode.com/superstar/";
 superstar.network=function(command,response) {
     var xhr=new XMLHttpRequest();
     xhr.onreadystatechange=function() {
-        if (this.readyState==4 && this.status==200)
+        if (this.readyState==4 && this.status==200 && response)
             response(xhr.responseText);
     }
     xhr.open("GET",superstar.server+command,true);
     xhr.send();
-}
-
-superstar.get=function(path,response) {
-    superstar.network(path+"?get",response);
 };
 
-superstar.get("2018/demo_of_eval/working",console.log);
+// Read a simple string
+superstar.network("2018/testarea/king?get",
+    function(the_king) {
+        console.log("Got king: "+the_king);
+    }
+);
+
+// Send off an object:
+var guy={x:13,y:17,name:"fred"};
+
+superstar.network("2018/testarea/fancy?set="+JSON.stringify(guy),
+    function(back) {
+        console.log("Got back: "+back);
+    }
+);
+
+// Receive an object:
+superstar.network("2018/testarea/fancy?get",
+    function(str) {
+        console.log("Got back string: "+str);
+        var obj=JSON.parse(str);
+        console.log("Object x="+obj.x+" and y="+obj.y);
+    }
+);
 
 </script>
+
+Press F12 to see the what's happening in the JavaScript debug console.
 </body>
 </html>
