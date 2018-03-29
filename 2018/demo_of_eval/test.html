@@ -1,0 +1,28 @@
+<html><head><title>Web Programming Demo</title></head>
+<body>
+<h1>Web Programming Demo</h1>
+<script>
+var superstar={};
+superstar.server="http://superstar.lawlorcode.com/superstar/"
+superstar.error=function(why) {
+    console.log("SUPERSTAR ERROR: "+why);
+};
+superstar.network=function(command,response) {
+    var xhr=new XMLHttpRequest();
+    xhr.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200)
+            response(xhr.responseText);
+    }
+    xhr.open("GET",superstar.server+command,true);
+    xhr.send();
+}
+
+superstar.get=function(path,response) {
+    superstar.network(path+"?get",response);
+};
+
+superstar.get("2018/demo_of_eval/working",console.log);
+
+</script>
+</body>
+</html>
