@@ -56,7 +56,7 @@ var draw_char=function(char) {
 // Game loop: grab all chars and render
 var all={};
 window.setInterval(function() {
-		loadall(function(all_chars) {
+		load_all(function(all_chars) {
 			all=all_chars;
 			for (var name in all) {
 				console.log("Loaded char "+name+": "+JSON.stringify(all[name]));
