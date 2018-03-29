@@ -1,7 +1,7 @@
 <html><head><title>Web Programming Demo</title></head>
 <body>
 <h1>Character Interaction Demo</h1>
-<canvas id="draw_canvas" width="100%" height="100%">
+<canvas id="draw_canvas" style="width:100%;height:100%">
 <script>
 // Basic comm utilities:
 var superstar={};
@@ -47,6 +47,13 @@ var save_char=function(name,char) {
 // Draw a character on the canvas
 var draw_canvas=document.getElementById("draw_canvas");
 var draw_ctx=draw_canvas.getContext("2d");
+
+var draw_background=function() {
+	draw_ctx.fillStyle = "#30C020";
+	draw_ctx.fillRect(0,0,400,400);
+	draw_ctx.fillStyle = "#000000";
+}
+
 var draw_char=function(char) {
 	draw_ctx.font="12px Arial";
 	draw_ctx.shadowBlur=10;
@@ -60,6 +67,7 @@ var all={};
 window.setInterval(function() {
 		load_all(function(all_chars) {
 			all=all_chars;
+			draw_background();
 			for (var name in all) {
 				console.log("Loaded char "+name+": "+JSON.stringify(all[name]));
 				draw_char(all[name]);
